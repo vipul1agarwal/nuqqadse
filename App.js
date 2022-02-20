@@ -1,13 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import RISetup from './app/RISetup'
+import { StyleSheet } from 'react-native';
 
-import Header from './src/Header';
-import Menu from './src/Vendor/Menu';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header />
-      <Menu />
+      <RISetup />
     </View>
   );
 }
