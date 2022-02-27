@@ -13,14 +13,21 @@ import {
     RLHeader,
     RLText,
     RLButton,
-    RLNotificationList
 } from 'basecomponent';
+import { SafeAreaView } from "react-native-safe-area-context";
+import RLShopkeeperList from "../../common/RLShopkeeperList";
 
-const Notification = ({ navigation, props }) => {
-    const notificationDataList = [
-        { id: 1, title: 'Your order has been received.', time: 'Now' },
-        { id: 2, title: 'Please review your order.', time: '1h ago' },
-        { id: 3, title: 'You have some items in your wishlist.', time: '05 march 2021' },
+const ShopList = ({ navigation, props }) => {
+    const ShopCandidatesList = [
+        { id: 1, title: 'LALAJI KI SHOP', time: 'Now' },
+        { id: 2, title: 'CHAMAN KI SHOP', time: '1h ago' },
+        { id: 3, title: 'SITARAM BHATOORE WALA.', time: '05 march 2021' },
+    ]
+
+    const categoryPopulorDataList = [
+        { id: 1, title: 'LALAJI KI SHOP', img: Images.shopGroceries },
+        { id: 2, title: 'CHAMAN KI SHOP', img: Images.shopGroceries },
+        { id: 3, title: 'SITARAM BHATOORE WALA.', img: Images.shopGroceries },
     ]
 
     useEffect(() => {
@@ -35,7 +42,7 @@ const Notification = ({ navigation, props }) => {
                 titlebackgroundColor={Colors.white}
                 showleftsimple={true}
                 imgleftSimple={Images.previousArrowRound}
-                title={BaseText.Notification}
+                title={BaseText.ShopList}
                 showTitle={true}
                 onPressleftSimple={() => navigation.goBack()}
             />
@@ -56,7 +63,7 @@ const Notification = ({ navigation, props }) => {
                     style={[viewStyle.selfCenter, notificationStyle.happytxtStyle]} />
                 <RLButton
                     SimpleButton={true}
-                    onpress={() => navigation.navigate('Dashboard')}
+                    // onpress={() => navigation.navigate('Dashboard')}
                     simplebuttontext={BaseText.ReturnHome}
                     simplebuttontextStyle={buttonStyle.buttonTextStyle}
                     simplebuttonStyle={[buttonStyle.commonbuttonStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 85, backgroundColor: Colors.activebtn, marginTop: 55 }]}
@@ -66,27 +73,29 @@ const Notification = ({ navigation, props }) => {
     }
 
     //Notification
-    const _renderNotification = () => {
+    const _renderShops = () => {
         return (
             <FlatList
-                nestedScrollEnabled
+                // nestedScrollEnabled
                 style={{ marginBottom: 20 }}
-                bounces={false}
-                data={notificationDataList}
-                renderItem={({ item, index }) => _renderItemNotificationList({ item, index })}
+                // bounces={false}
+                data={categoryPopulorDataList}
+                renderItem={({ item, index }) => _renderItemShopList({ item, index })}
                 keyExtractor={item => item.id.toString()}
             />
         )
     }
 
     //Flatlist NotificationList Item
-    const _renderItemNotificationList = ({ item, index }) => {
+    const _renderItemShopList = ({ item, index }) => {
         return (
-            <RLNotificationList
-                title={item.title}
-                marginTop={index == 0 ? 8 : 0}
-                // onPress={() => alert(item.title)}
-                time={item.time}
+            <RLShopkeeperList
+                shopkeeperName={item.title}
+                replyTime={'Replies in 10 mins'}
+                rateValue={'4.5'}
+                ratestarValue={4.5}
+                shopkeeperImg={item.img}
+                onPress={() => navigation.navigate('Dashboard')}
             />
         )
     }
@@ -98,10 +107,10 @@ const Notification = ({ navigation, props }) => {
                     barStyle={"dark-content"} />
                 {_header()}
 
-                <ScrollView contentContainerStyle={{ flexGrow: 1, }} bounces={false}>
-                    {notificationDataList.length > 0 && _renderNotification()}
-                    {notificationDataList.length <= 0 && _renderEmptyNitification()}
-                </ScrollView>
+                <SafeAreaView contentContainerStyle={{ flexGrow: 1, }} bounces={false}>
+                    {ShopCandidatesList.length > 0 && _renderShops()}
+                    {ShopCandidatesList.length <= 0 && _renderEmptyNitification()}
+                </SafeAreaView>
             </View>
         </Fragment>
     );
@@ -110,4 +119,4 @@ const Notification = ({ navigation, props }) => {
 const select = (store) => {
     return store;
 }
-export default connect(select)(Notification);
+export default connect(select)(ShopList);

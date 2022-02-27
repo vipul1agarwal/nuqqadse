@@ -117,5 +117,8 @@ const Images = {
     ptmil: require('assets/StaticImges/ptmil.png'),
     ptopu: require('assets/StaticImges/ptopu.png'),
     ptVio: require('assets/StaticImges/ptVio.png'),
+
+    // shop Type Icons
+    shopGroceries: require('assets/ShopIcon/confectionary.png'),
 }
 export default Images;

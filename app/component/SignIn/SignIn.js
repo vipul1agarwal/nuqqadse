@@ -21,6 +21,7 @@ import {
 const SignIn = ({ navigation, props }) => {
     let fieldEmailRef = React.createRef();
     let fieldPasswordRef = React.createRef();
+    let fieldPhoneRef = React.createRef();
 
     useEffect(() => {
 
@@ -63,31 +64,17 @@ const SignIn = ({ navigation, props }) => {
     const _renderTextInput = () => {
         return (
             <View>
-                <View style={[viewStyle.selfCenter, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 5, marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 2 }]}>
-                    <RLTextInput
-                        PlainTextInput={true}
-                        placeholder={BaseText.Youremail}
-                        placeholderTextColor={Colors.gray}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldPasswordRef)}
-                        refKey={'email'}
-                        fieldRef={fieldEmailRef}
-                    />
-                </View>
-
-                <View style={[viewStyle.selfCenter]}>
-                    <RLTextInput
-                        PasswordTextInput={true}
-                        hideShowImage={Images.hidePassword}
-                        placeholder={BaseText.Yourpassword}
-                        placeholderTextColor={Colors.gray}
-                        secureTextEntry={true}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldPasswordRef)}
-                        refKey={'password'}
-                        fieldRef={fieldPasswordRef}
-                    />
-                </View>
+                <View style={[viewStyle.selfCenter, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 4, marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 4 }]}>
+                <RLTextInput
+                    PlainTextInput={true}
+                    placeholder={BaseText.EnterphoneNum}
+                    placeholderTextColor={Colors.gray}
+                    onEditTextField={(value) => _onChangeTextField(value, 'userName')}
+                    onSubmitEditing={() => _onSubmitEditing(fieldPhoneRef)}
+                    refKey={'phone'}
+                    fieldRef={fieldPhoneRef}
+                />
+            </View>
             </View>
         )
     }
@@ -97,8 +84,8 @@ const SignIn = ({ navigation, props }) => {
         return (
             <RLButton
                 SimpleButton={true}
-                onpress={() => navigation.navigate('Dashboard')}
-                simplebuttontext={BaseText.Sign_IN}
+                onpress={() => navigation.navigate('Security')}
+                simplebuttontext={BaseText.GET_OTP}
                 simplebuttontextStyle={buttonStyle.buttonTextStyle}
                 simplebuttonStyle={[buttonStyle.commonbuttonStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 85, backgroundColor: Colors.activebtn }]}
             />
@@ -164,10 +151,10 @@ const SignIn = ({ navigation, props }) => {
                     <View style={[viewStyle.flex]}>
                         {_renderHeader()}
                         {_renderTextInput()}
-                        {_renderForgetText()}
+                        {/* {_renderForgetText()} */}
                         {_renderSignButton()}
-                        {_renderSocialText()}
-                        {_renderSocialButton()}
+                        {/* {_renderSocialText()}
+                        {_renderSocialButton()} */}
                     </View>
                 </KeyboardAwareScrollView>
             </View>

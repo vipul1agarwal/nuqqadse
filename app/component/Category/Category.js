@@ -100,6 +100,7 @@ const Category = ({ navigation, props }) => {
                 />
 
                 <FlatList
+                    nestedScrollEnabled
                     scrollEnabled={false}
                     style={[viewStyle.centerViewStyle, { marginVertical: 12 }]}
                     bounces={false}
@@ -185,6 +186,7 @@ const Category = ({ navigation, props }) => {
                     style={[textStyle.textWidthStyle, textStyle.categoryTextStyle,]} />
 
                 <FlatList
+                    nestedScrollEnabled
                     style={{ marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 5, }}
                     data={categoryPopulorDataList}
                     renderItem={({ item, index }) => _renderItemPopularList({ item, index })}

@@ -2,7 +2,7 @@
 import React from "react";
 import { TouchableOpacity, Image, StyleSheet, Text, View } from "react-native";
 
-const Tab = ({ tab, icon, onPress, color, key, index, profileBcolor }) => {
+const Tab = ({ tab, icon, onPress, color, index, profileBcolor }) => {
     if (index == 2) {
         return <TouchableOpacity onPress={onPress} style={[styles.btnStyle,]} >
             <View style={[styles.profileViewStyle, { borderColor: profileBcolor }]}>

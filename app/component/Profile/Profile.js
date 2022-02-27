@@ -55,6 +55,7 @@ const Profile = ({ navigation, props }) => {
     const _renderProfileSettingFlatList = () => {
         return (
             <FlatList
+                nestedScrollEnabled
                 style={{ bottom: 33, }}
                 data={ProfileSettingDataList}
                 renderItem={({ item, index }) => _renderItemProfileSettingList({ item, index })}

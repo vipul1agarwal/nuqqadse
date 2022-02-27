@@ -99,6 +99,7 @@ const SubCategory = ({ navigation, props }) => {
         return (
             <View style={[viewStyle.rowdirections, viewStyle.centerViewStyle, { marginBottom: 30 }]}>
                 <FlatList
+                    nestedScrollEnabled
                     contentContainerStyle={{ alignItems: 'flex-start' }}
                     showsVerticalScrollIndicator={false}
                     data={data1}
@@ -107,6 +108,7 @@ const SubCategory = ({ navigation, props }) => {
                 />
 
                 <FlatList
+                    nestedScrollEnabled
                     contentContainerStyle={{ alignItems: 'flex-end' }}
                     showsVerticalScrollIndicator={false}
                     data={data2}
@@ -124,7 +126,7 @@ const SubCategory = ({ navigation, props }) => {
                 imgBackgroundHeight={index % 2 == 0 ? 262 : 169}
                 productName={item.title}
                 productImg={item.img}
-            // onPress={() => navigation.navigate('CheckOut')}
+            onPress={() => navigation.navigate('CheckOut')}
             />
         )
     }
@@ -136,7 +138,7 @@ const SubCategory = ({ navigation, props }) => {
                 imgBackgroundHeight={index % 2 == 0 ? 169 : 262}
                 productName={item.title}
                 productImg={item.img}
-            // onPress={() => navigation.navigate('CheckOut')}
+            onPress={() => navigation.navigate('CheckOut')}
             />
         )
     }

@@ -5,7 +5,10 @@ import Home from "component/Home/Home";
 import SearchProduct from "component/SearchProduct/SearchProduct";
 import AppIntro from "component/AppIntro/AppIntro";
 import SignIn from "component/SignIn/SignIn";
-import SignUp from "component/SignUp/SignUp";
+import SignUpName from "component/SignUp/SignUpName";
+import SignUpPhone from "component/SignUp/SignUpPhone";
+import Security from "component/Security/Security";
+import ShopList from "component/ShopList/ShopList";
 import ForgotPassword from "component/Forgot/ForgotPassword";
 import Email from "component/Forgot/Email";
 import Phone from "component/Forgot/Phone";
@@ -30,7 +33,10 @@ const StackNavigator = () => {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="AppIntro" component={AppIntro} />
             <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignUp" component={SignUpName} />
+            <Stack.Screen name="SignUpPhone" component={SignUpPhone} />
+            <Stack.Screen name="Security" component={Security} />
+            <Stack.Screen name="ShopList" component={ShopList} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name="Email" component={Email} />
             <Stack.Screen name="Phone" component={Phone} />
