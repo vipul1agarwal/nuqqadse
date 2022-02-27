@@ -12,9 +12,15 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator
             tabBar={props => <CustomTab {...props} />}
-            tabBarOptions={{
-                keyboardHidesTabBar: true,
-            }}
+            screenOptions={{
+                tabBarHideOnKeyboard: true,
+                tabBarStyle: [
+                  {
+                    display: "flex"
+                  },
+                  null
+                ]
+              }}
             initialRouteName={'Dashboard'}>
             <Tab.Screen name="Dashboard" component={Dashboard} initialParams={{ icon: Images.activeHome, icon1: Images.deActiveHome }} />
             <Tab.Screen name="Notification" component={NotificationStackNavigator} initialParams={{ icon: Images.activeNotification, icon1: Images.deActiveNotification }} />

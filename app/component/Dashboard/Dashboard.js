@@ -97,6 +97,7 @@ const Dashboard = ({ navigation, props }) => {
                 />
 
                 <FlatList
+                    nestedScrollEnabled
                     bounces={false}
                     data={categoryDataList}
                     renderItem={({ item, index }) => _renderItemCategoryList({ item, index })}
@@ -273,6 +274,7 @@ const Dashboard = ({ navigation, props }) => {
                 />
 
                 <FlatList
+                    nestedScrollEnabled
                     bounces={false}
                     data={saleDiscountDataList}
                     renderItem={({ item, index }) => _renderItemSaleDiscountList({ item, index })}
@@ -292,6 +294,7 @@ const Dashboard = ({ navigation, props }) => {
                     style={[textStyle.textWidthStyle, textStyle.categoryTextStyle,]} />
 
                 <FlatList
+                    nestedScrollEnabled
                     style={{ marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 5, }}
                     data={populorDataList}
                     renderItem={({ item, index }) => _renderItemPopularList({ item, index })}

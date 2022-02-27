@@ -19,11 +19,7 @@ import {
     RLTextInput
 } from 'basecomponent';
 
-const SignUpName = ({ navigation, props }) => {
-    let fieldNameRef = React.createRef();
-    let fieldEmailRef = React.createRef();
-    let fieldPasswordRef = React.createRef();
-    let fieldCPasswordRef = React.createRef();
+const SignUpPhone = ({ navigation, props }) => {
     let fieldPhoneRef = React.createRef();
 
     useEffect(() => {
@@ -63,22 +59,10 @@ const SignUpName = ({ navigation, props }) => {
         )
     }
 
-    //Text Input
-    const _renderTextInput = () => {
+       //Text Input
+       const _renderTextInput = () => {
         return (
-            <View>
-                <View style={[viewStyle.selfCenter, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 5, marginBottom: BaseStyle.DEVICE_HEIGHT / 100 }]}>
-                    <RLTextInput
-                        PlainTextInput={true}
-                        placeholder={BaseText.Yourname}
-                        placeholderTextColor={Colors.gray}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldEmailRef)}
-                        refKey={'name'}
-                        fieldRef={fieldNameRef}
-                    />
-                </View>
-                <View style={[viewStyle.selfCenter, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 2, marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 4 }]}>
+            <View style={[viewStyle.selfCenter, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 9, marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 22 }]}>
                 <RLTextInput
                     PlainTextInput={true}
                     placeholder={BaseText.EnterphoneNum}
@@ -88,47 +72,6 @@ const SignUpName = ({ navigation, props }) => {
                     refKey={'phone'}
                     fieldRef={fieldPhoneRef}
                 />
-            </View>
-
-                {/* <View style={[viewStyle.selfCenter, { marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 2 }]}>
-                    <RLTextInput
-                        PlainTextInput={true}
-                        placeholder={BaseText.Youremail}
-                        placeholderTextColor={Colors.gray}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldPasswordRef)}
-                        refKey={'email'}
-                        fieldRef={fieldEmailRef}
-                    />
-                </View>
-
-                <View style={[viewStyle.selfCenter, { marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 2 }]}>
-                    <RLTextInput
-                        PasswordTextInput={true}
-                        hideShowImage={Images.hidePassword}
-                        placeholder={BaseText.Yourpassword}
-                        placeholderTextColor={Colors.gray}
-                        secureTextEntry={true}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldCPasswordRef)}
-                        refKey={'password'}
-                        fieldRef={fieldPasswordRef}
-                    />
-                </View>
-
-                <View style={[viewStyle.selfCenter, { marginBottom: BaseStyle.DEVICE_HEIGHT / 100 * 2 }]}>
-                    <RLTextInput
-                        PasswordTextInput={true}
-                        hideShowImage={Images.hidePassword}
-                        placeholder={BaseText.Confirmpassword}
-                        placeholderTextColor={Colors.gray}
-                        secureTextEntry={true}
-                        onEditTextField={(value) => _onChangeTextField(value, 'userName')}
-                        onSubmitEditing={() => _onSubmitEditing(fieldCPasswordRef)}
-                        refKey={'cpassword'}
-                        fieldRef={fieldCPasswordRef}
-                    />
-                </View> */}
             </View>
         )
     }
@@ -195,6 +138,8 @@ const SignUpName = ({ navigation, props }) => {
                         {_renderHeader()}
                         {_renderTextInput()}
                         {_renderSignButton()}
+                        {_renderSocialText()}
+                        {_renderSocialButton()}
                     </View>
                 </KeyboardAwareScrollView>
             </View>
@@ -205,4 +150,4 @@ const SignUpName = ({ navigation, props }) => {
 const select = (store) => {
     return store;
 }
-export default connect(select)(SignUpName);
+export default connect(select)(SignUpPhone);

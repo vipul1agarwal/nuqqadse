@@ -106,6 +106,7 @@ const SearchProduct = ({ navigation, props }) => {
         return (
             <View style={[viewStyle.rowdirections, viewStyle.centerViewStyle, { marginBottom: 30 }]}>
                 <FlatList
+                    nestedScrollEnabled
                     contentContainerStyle={{ alignItems: 'flex-start' }}
                     showsVerticalScrollIndicator={false}
                     data={data1}
@@ -114,6 +115,7 @@ const SearchProduct = ({ navigation, props }) => {
                 />
 
                 <FlatList
+                    nestedScrollEnabled
                     contentContainerStyle={{ alignItems: 'flex-end' }}
                     showsVerticalScrollIndicator={false}
                     data={data2}
