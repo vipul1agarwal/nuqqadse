@@ -25,6 +25,10 @@ const viewStyle = StyleSheet.create({
     },
     centerViewWidth: {
         width: BaseStyle.DEVICE_WIDTH / 100 * 85,
+    },
+    fullWidth: {
+        width:BaseStyle.DEVICE_WIDTH ,
     }
 })
 export default viewStyle
+

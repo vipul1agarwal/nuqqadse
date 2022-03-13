@@ -103,7 +103,7 @@ const SubCategory = ({ navigation, props }) => {
                     contentContainerStyle={{ alignItems: 'flex-start' }}
                     showsVerticalScrollIndicator={false}
                     data={data1}
-                    renderItem={({ item, index }) => _renderItemSearchList1({ item, index })}
+                    renderItem={({ item, index }) => _renderItemSearchList2({ item, index })}
                     keyExtractor={item => item.id.toString()}
                 />
 
@@ -135,7 +135,7 @@ const SubCategory = ({ navigation, props }) => {
     const _renderItemSearchList2 = ({ item, index }) => {
         return (
             <RLSearchProductList
-                imgBackgroundHeight={index % 2 == 0 ? 169 : 262}
+                imgBackgroundHeight={169}
                 productName={item.title}
                 productImg={item.img}
             onPress={() => navigation.navigate('CheckOut')}

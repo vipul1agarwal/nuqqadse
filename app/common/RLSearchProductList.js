@@ -22,13 +22,13 @@ const RLSearchProductList = (props) => {
                     style={[searchProductListStyle.imgBackStyle, { height: imgBackgroundHeight, }]}
                     imageStyle={[searchProductListStyle.imgBackStyle, { height: imgBackgroundHeight, }]}
                     source={productImg}>
-                    <View style={searchProductListStyle.likeViewStyle}>
+                    {/* <View style={searchProductListStyle.likeViewStyle}>
                         <TouchableOpacity style={searchProductListStyle.likeBtnStyle}>
                             <Image
-                                source={Images.lovered}
+                                source={Images.cartRound}
                                 style={[searchProductListStyle.likeimgStyle, searchProductListStyle.imgeresize]} />
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </ImageBackground>
             </TouchableOpacity>
 
@@ -64,13 +64,13 @@ const RLSearchProductList = (props) => {
                     </View>
                 </View>
 
-                <View style={searchProductListStyle.priceViewStyle}>
+                {/* <View style={searchProductListStyle.priceViewStyle}>
                     <RLText
                         RlnumberOfLines={1}
                         text={'$97'}
                         style={searchProductListStyle.pricetxtStyle}
                     />
-                </View>
+                </View> */}
             </View>
         </View>
     );

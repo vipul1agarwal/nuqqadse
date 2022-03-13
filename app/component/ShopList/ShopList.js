@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect , useState} from "react";
 import { View, ScrollView, Image, FlatList } from "react-native";
 import { connect } from 'react-redux';
 import BaseText from "constants/BaseText";
@@ -13,22 +13,46 @@ import {
     RLHeader,
     RLText,
     RLButton,
+    RLSearchProductList,
 } from 'basecomponent';
 import { SafeAreaView } from "react-native-safe-area-context";
 import RLShopkeeperList from "../../common/RLShopkeeperList";
 
 const ShopList = ({ navigation, props }) => {
-    const ShopCandidatesList = [
-        { id: 1, title: 'LALAJI KI SHOP', time: 'Now' },
-        { id: 2, title: 'CHAMAN KI SHOP', time: '1h ago' },
-        { id: 3, title: 'SITARAM BHATOORE WALA.', time: '05 march 2021' },
-    ]
 
-    const categoryPopulorDataList = [
-        { id: 1, title: 'LALAJI KI SHOP', img: Images.shopGroceries },
-        { id: 2, title: 'CHAMAN KI SHOP', img: Images.shopGroceries },
-        { id: 3, title: 'SITARAM BHATOORE WALA.', img: Images.shopGroceries },
+    
+    const SearchDataList = [
+        { id: 1, categoryId: 0, title: 'Vionata', img: Images.ptVio, },
+        { id: 2, categoryId: 0, title: 'Opuntia', img: Images.ptopu, },
+        { id: 3, categoryId: 0, title: 'Annalis', img: Images.ptann, },
+        { id: 4, categoryId: 0, title: 'Columnar', img: Images.ptcol, },
+        { id: 5, categoryId: 0, title: 'Milaria', img: Images.ptmil, },
+        { id: 6, categoryId: 0, title: 'Inca', img: Images.ptinc, },
+        { id: 7, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 8, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+        { id: 9, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 10, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+        { id: 11, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 12, categoryId: 1, title: 'Emerald', img: Images.furniture, },
     ]
+    const ArrayList1 = [] //Array1
+    const ArrayList2 = [] //Array2
+    const [data1, setData1] = useState([]);//Array1
+    const [data2, setData2] = useState([]);//Array2
+
+    useEffect(() => {
+        SearchDataList.map((item, index) => {
+            if (index % 2 == 0) {
+                ArrayList1.push(item)
+                setData1(ArrayList1)
+            }
+            else {
+                ArrayList2.push(item)
+                setData2(ArrayList2)
+            }
+        })  //Slice Array
+    }, [])
+
 
     useEffect(() => {
     }, [])
@@ -86,30 +110,52 @@ const ShopList = ({ navigation, props }) => {
         )
     }
 
-    //Flatlist NotificationList Item
-    const _renderItemShopList = ({ item, index }) => {
+    const _renderSearchProduct = () => {
         return (
-            <RLShopkeeperList
-                shopkeeperName={item.title}
-                replyTime={'Replies in 10 mins'}
-                rateValue={'4.5'}
-                ratestarValue={4.5}
-                shopkeeperImg={item.img}
-                onPress={() => navigation.navigate('Dashboard')}
+            <View style={[viewStyle.selfCenter, { marginBottom: 30 }]}>
+                <FlatList
+                    nestedScrollEnabled
+                    contentContainerStyle={{ alignItems: 'flex-start' }}
+                    showsVerticalScrollIndicator={false}
+                    data={data1}
+                    renderItem={({ item, index }) => _renderItemSearchList2({ item, index })}
+                    keyExtractor={item => item.id.toString()}
+                />
+
+                {/* <FlatList
+                    nestedScrollEnabled
+                    contentContainerStyle={{ alignItems: 'flex-end' }}
+                    showsVerticalScrollIndicator={false}
+                    data={data2}
+                    renderItem={({ item, index }) => _renderItemSearchList2({ item, index })}
+                    keyExtractor={item => item.id.toString()}
+                /> */}
+            </View>
+        )
+    }
+
+    //Flatlist SearchList2 Item
+    const _renderItemSearchList2 = ({ item, index }) => {
+
+        return (
+            <RLSearchProductList
+                imgBackgroundHeight={340}
+                productName={item.title}
+                productImg={item.img}
+            // onPress={() => navigation.navigate('CheckOut')}
             />
         )
     }
 
     return (
         <Fragment>
-            <View style={[viewStyle.flex, viewStyle.flexbgColor]}>
+            <View style={[viewStyle.flexbgColor]}>
                 <GeneralStatusBarColor backgroundColor={Colors.white}
                     barStyle={"dark-content"} />
                 {_header()}
 
-                <SafeAreaView contentContainerStyle={{ flexGrow: 1, }} bounces={false}>
-                    {ShopCandidatesList.length > 0 && _renderShops()}
-                    {ShopCandidatesList.length <= 0 && _renderEmptyNitification()}
+                <SafeAreaView>
+                    {_renderSearchProduct()}
                 </SafeAreaView>
             </View>
         </Fragment>

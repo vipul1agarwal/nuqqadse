@@ -5,7 +5,7 @@ import ENV from 'env/index';
 
 const searchProductListStyle = StyleSheet.create({
     mainViewStyle: {
-        width: BaseStyle.DEVICE_WIDTH / 100 * 40,
+        width: BaseStyle.DEVICE_WIDTH / 100 * 90,
     },
     imgBackStyle: {
         backgroundColor: Colors.gray2,
@@ -24,8 +24,9 @@ const searchProductListStyle = StyleSheet.create({
         marginHorizontal: 20
     },
     likeimgStyle: {
-        width: 18,
-        height: 15,
+        width: 38,
+        height: 35,
+        marginLeft: 40
     },
     infoViewStyle: {
         justifyContent: 'space-between',
