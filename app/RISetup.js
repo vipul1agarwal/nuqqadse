@@ -5,7 +5,6 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { LogBox } from 'react-native';
 import configureStore from './Redux/Store/ConfigureStore';
-const store = configureStore();
 
 const RISetup = () => {
 
@@ -13,12 +12,8 @@ const RISetup = () => {
         LogBox.ignoreAllLogs()
     }, [])
 
-    console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
-
     return (
-        <Provider store={store}>
             <App />
-        </Provider>
     )
 };
 export default RISetup;

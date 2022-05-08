@@ -30,7 +30,8 @@ const RLHeader = (props) => {
         title,
         onPress,
         CartHeader,
-        titlerightImgstyle
+        titlerightImgstyle,
+        onCartImgPress,
     } = props;
 
     //plain Header
@@ -78,9 +79,11 @@ const RLHeader = (props) => {
                         fieldRef={fieldRef}
                         onPress={onPress}
                     />
-                    <View style={headerStyle.scartViewStyle}>
+                    <TouchableOpacity style={headerStyle.scartViewStyle}
+                        onPress={onCartImgPress}
+                        >
                         <Image source={cartImg} style={headerStyle.scartStyle} />
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View >
         )

@@ -24,8 +24,9 @@ const searchProductListStyle = StyleSheet.create({
         marginHorizontal: 20
     },
     likeimgStyle: {
-        width: 18,
-        height: 15,
+        width: 38,
+        height: 35,
+        marginLeft: 40
     },
     infoViewStyle: {
         justifyContent: 'space-between',

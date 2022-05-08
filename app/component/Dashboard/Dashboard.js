@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState} from "react";
 import { View, StatusBar, Image, ScrollView, TouchableOpacity, FlatList, Platform } from "react-native";
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import BaseStyle from 'constants/BaseStyle';
 import BaseText from "constants/BaseText";
 import Colors from 'constants/Colors';
@@ -9,13 +9,14 @@ import viewStyle from 'theme/component/ViewStyle';
 import dashboardStyle from 'theme/component/DashboardStyle';
 import textStyle from 'theme/component/TextStyle';
 import GeneralStatusBarColor from 'statusbarstyle/GeneralStatusBarColor';
-import Tooltip from 'react-native-walkthrough-tooltip';
+import { cartActions } from '../../Redux/Reducers/cart'
 import {
     RLHeader,
     RLText,
     RLCategoryList,
     RLSaleDiscount,
-    RLPopularList
+    RLPopularList,
+    RLSearchProductList,
 } from 'basecomponent';
 
 const Dashboard = ({ navigation, props }) => {
@@ -43,11 +44,42 @@ const Dashboard = ({ navigation, props }) => {
         { id: 2, title: 'Kimono Clogs', img: Images.pophanky },
     ]
 
+    const SearchDataList = [
+        { id: 1, categoryId: 0, title: 'Vionata', img: Images.ptVio, },
+        { id: 2, categoryId: 0, title: 'Opuntia', img: Images.ptopu, },
+        { id: 3, categoryId: 0, title: 'Annalis', img: Images.ptann, },
+        { id: 4, categoryId: 0, title: 'Columnar', img: Images.ptcol, },
+        { id: 5, categoryId: 0, title: 'Milaria', img: Images.ptmil, },
+        { id: 6, categoryId: 0, title: 'Inca', img: Images.ptinc, },
+        { id: 7, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 8, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+        { id: 9, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 10, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+        { id: 11, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+        { id: 12, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+    ]
+    const ArrayList1 = [] //Array1
+    const ArrayList2 = [] //Array2
+    const [data1, setData1] = useState([]);//Array1
+    const [data2, setData2] = useState([]);//Array2
+    const [selectedCategory, setSelectedCategory] = useState(0);
     const [toolTipVisible, setToolTipVisible] = useState(false); //show toolTip
-
+    const item = useSelector((state) => state)
+    const dispatch = useDispatch()
+    console.log(item, ' -------')
     useEffect(() => {
-
+        SearchDataList.map((item, index) => {
+            if (index % 2 == 0) {
+                ArrayList1.push(item)
+                setData1(ArrayList1)
+            }
+            else {
+                ArrayList2.push(item)
+                setData2(ArrayList2)
+            }
+        })  //Slice Array
     }, [])
+
     //================================ Start common Function ===========================================
     //OnChange TextInput
     const _onChangeTextField = (value, type) => {
@@ -60,16 +92,16 @@ const Dashboard = ({ navigation, props }) => {
     }
 
     //on Click ListItem
-    const _onClickItem = (parms) => {
-        switch (parms) {
-            case 1:
-                navigation.navigate('Category')
-                break;
-            case 2:
-                break;
-            default:
-                break;
-        }
+    const _onClickItem = (params) => {
+        // switch (params) {
+        //     case 1:
+        //         break;
+        //     case 2:
+        //         break;
+        //     default:
+        //         break;
+        // }
+        setSelectedCategory(params)
     }
     //================================ Start common componenet =========================================== 
     //header
@@ -83,7 +115,8 @@ const Dashboard = ({ navigation, props }) => {
                 onSubmitEditing={() => _onSubmitEditing(fieldSearchRef)}
                 refKey={'search'}
                 fieldRef={fieldSearchRef}
-                onPress={() => navigation.navigate('SearchProduct')} />
+                onPress={() => navigation.navigate('SearchProduct')}
+                onCartImgPress = {() => navigation.navigate('CheckOut')} />
         )
     }
 
@@ -91,10 +124,10 @@ const Dashboard = ({ navigation, props }) => {
     const _renderTopView = () => {
         return (
             <View style={dashboardStyle.mainViewStyle}>
-                <RLText
+                {/* <RLText
                     text={BaseText.Category}
                     style={[textStyle.textWidthStyle, textStyle.categoryTextStyle, { marginTop: BaseStyle.DEVICE_HEIGHT / 100 * 1 }]}
-                />
+                /> */}
 
                 <FlatList
                     nestedScrollEnabled
@@ -105,7 +138,7 @@ const Dashboard = ({ navigation, props }) => {
                     keyExtractor={item => item.id.toString()}
                 />
 
-                <View style={[viewStyle.centerViewStyle, viewStyle.rowdirections, dashboardStyle.paymentViewStyle]}>
+                {/* <View style={[viewStyle.centerViewStyle, viewStyle.rowdirections, dashboardStyle.paymentViewStyle]}>
                     <View style={[viewStyle.rowdirections, dashboardStyle.priceView]}>
                         <TouchableOpacity>
                             <Image
@@ -216,7 +249,7 @@ const Dashboard = ({ navigation, props }) => {
                             </TouchableOpacity>
                         </Tooltip>
                     </View>
-                </View>
+                </View> */}
             </View>
         )
     }
@@ -226,10 +259,10 @@ const Dashboard = ({ navigation, props }) => {
         return (
             <RLCategoryList
                 isDashboardCategoryList={true}
-                categoryImg={item.img}
+                categoryImg={item.img}  
                 catname={item.title}
                 marginLeft={index == 0 ? BaseStyle.DEVICE_WIDTH / 100 * 7.5 : 0}
-                onPress={() => _onClickItem(1)} />
+                onPress={() => _onClickItem(index%2)} />
         )
     }
 
@@ -304,6 +337,59 @@ const Dashboard = ({ navigation, props }) => {
         )
     }
 
+        //Search Product
+        const _renderSearchProduct = () => {
+            return (
+                <View style={[viewStyle.rowdirections, viewStyle.centerViewStyle, { marginBottom: 30 }]}>
+                    <FlatList
+                        nestedScrollEnabled
+                        contentContainerStyle={{ alignItems: 'flex-start' }}
+                        showsVerticalScrollIndicator={false}
+                        data={data1}
+                        renderItem={({ item, index }) => _renderItemSearchList2({ item, index })}
+                        keyExtractor={item => item.id.toString()}
+                    />
+    
+                    <FlatList
+                        nestedScrollEnabled
+                        contentContainerStyle={{ alignItems: 'flex-end' }}
+                        showsVerticalScrollIndicator={false}
+                        data={data2}
+                        renderItem={({ item, index }) => _renderItemSearchList2({ item, index })}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </View>
+            )
+        }
+    
+        //Flatlist SearchList1 Item
+        const _renderItemSearchList1 = ({ item, index }) => {
+            return (
+                <RLSearchProductList
+                    imgBackgroundHeight={index % 2 == 0 ? 262 : 169}
+                    productName={item.title}
+                    productImg={item.img}
+                onPress={() => dispatch(cartActions.addToCart)}
+                />
+            )
+        }
+    
+        //Flatlist SearchList2 Item
+        const _renderItemSearchList2 = ({ item, index }) => {
+            if(item.categoryId !== selectedCategory) {
+                return;
+            }
+    
+            return (
+                <RLSearchProductList
+                    imgBackgroundHeight={169}
+                    productName={item.title}
+                    productImg={item.img}
+                onPress={() => dispatch(cartActions.addToCart([item]))}
+                />
+            )
+        }
+
     return (
         <Fragment>
             <View style={[viewStyle.flex, viewStyle.flexbgColor]}>
@@ -313,8 +399,7 @@ const Dashboard = ({ navigation, props }) => {
 
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
                     {_renderTopView()}
-                    {_renderSaleDiscount()}
-                    {_renderPopular()}
+                    {_renderSearchProduct()}
                 </ScrollView>
             </View>
         </Fragment >

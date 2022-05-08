@@ -25,7 +25,7 @@ const RLSearchProductList = (props) => {
                     <View style={searchProductListStyle.likeViewStyle}>
                         <TouchableOpacity style={searchProductListStyle.likeBtnStyle}>
                             <Image
-                                source={Images.lovered}
+                                source={Images.cartRound}
                                 style={[searchProductListStyle.likeimgStyle, searchProductListStyle.imgeresize]} />
                         </TouchableOpacity>
                     </View>

@@ -1,9 +1,9 @@
 //import here all Redux file 
-import { combineReducers } from 'redux';
-import user from './user';
-import activityIndicator from './activityIndicator';
+import { configureStore } from '@reduxjs/toolkit';
+import cart from './cart'
 
-export default combineReducers({
-    user,
-    activityIndicator
+export const store = configureStore({
+    reducer: {
+        cart,
+    }
 });
