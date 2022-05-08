@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { View, ScrollView, Image, TouchableOpacity } from "react-native";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import BaseText from "constants/BaseText";
 import BaseStyle from 'constants/BaseStyle';
 import Colors from 'constants/Colors';
@@ -17,6 +17,7 @@ import {
     RLButton,
     RLCheckOutList
 } from 'basecomponent';
+import { cartSlice } from "../../Redux/Reducers/cart";
 
 const CheckOut = ({ navigation, props }) => {
     const SearchDataList = [
@@ -29,6 +30,8 @@ const CheckOut = ({ navigation, props }) => {
     ]
     const [check, setCheck] = useState(false);
 
+    const cartList = useSelector(state => state.cart)
+    console.log(cartList, ' ++++++++')
     useEffect(() => {
     }, [])
     //================================ Start common Function ===========================================
@@ -125,7 +128,7 @@ const CheckOut = ({ navigation, props }) => {
                     <SwipeListView
                         style={{ marginTop: 10 }}
                         bounces={false}
-                        data={SearchDataList}
+                        data={cartList}
                         renderItem={renderItem}
                         renderHiddenItem={renderHiddenItem}
                         ItemSeparatorComponent={FlatListItemSeparator}
