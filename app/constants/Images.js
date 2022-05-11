@@ -120,5 +120,12 @@ const Images = {
 
     // shop Type Icons
     shopGroceries: require('assets/ShopIcon/confectionary.png'),
+    shop1: require('assets/ShopIcon/shop_pic_1.png'),
+    shop2: require('assets/ShopIcon/shop_pic_2.png'),
+    shop3: require('assets/ShopIcon/shop_pic_3.png'),
+    shop4: require('assets/ShopIcon/shop_pic_4.png'),
+    shop5: require('assets/ShopIcon/shop_pic_5.png'),
+    shop6: require('assets/ShopIcon/shop_pic_6.png'),
+
 }
 export default Images;

@@ -9,7 +9,7 @@ import viewStyle from 'theme/component/ViewStyle';
 import dashboardStyle from 'theme/component/DashboardStyle';
 import textStyle from 'theme/component/TextStyle';
 import GeneralStatusBarColor from 'statusbarstyle/GeneralStatusBarColor';
-import { cartActions } from '../../Redux/Reducers/cart'
+import { cartActions } from '../../Redux/Reducers/Cart'
 import {
     RLHeader,
     RLText,

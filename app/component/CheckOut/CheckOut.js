@@ -17,7 +17,6 @@ import {
     RLButton,
     RLCheckOutList
 } from 'basecomponent';
-import { cartSlice } from "../../Redux/Reducers/cart";
 
 const CheckOut = ({ navigation, props }) => {
     const SearchDataList = [

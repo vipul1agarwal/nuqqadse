@@ -28,9 +28,17 @@ const RLShopkeeperList = (props) => {
                     source={shopkeeperImg}
                 />
                 <View style={[popularListStyle.detailmainViewStyle, viewStyle.selfCenter]}>
+
+
+                    <RLText
+                        text={shopkeeperName}
+                        RlnumberOfLines={1}
+                        style={popularListStyle.pricetxtStyle}
+                    />
+
                     <View style={[viewStyle.rowdirections, { justifyContent: 'space-between', }]}>
                         <RLText
-                            text={shopkeeperName}
+                            text={replyTime}
                             RlnumberOfLines={1}
                             style={[popularListStyle.pnametxtStyle]}
                         />
@@ -40,12 +48,6 @@ const RLShopkeeperList = (props) => {
                                 style={[popularListStyle.heartImgStyle, popularListStyle.resizeImg]} />
                         </TouchableOpacity>
                     </View>
-
-                    <RLText
-                        text={replyTime}
-                        RlnumberOfLines={1}
-                        style={popularListStyle.pricetxtStyle}
-                    />
 
                     <View style={[viewStyle.rowdirections, popularListStyle.ratemainViewStyle]}>
                         <View style={[viewStyle.rowdirections, { alignItems: 'center' }]}>
