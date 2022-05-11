@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
-import { View, ScrollView, Image, FlatList } from "react-native";
-import { connect } from 'react-redux';
+import { View, Image, FlatList } from "react-native";
+import { connect, useSelector } from 'react-redux';
 import BaseText from "constants/BaseText";
 import BaseStyle from 'constants/BaseStyle';
 import Colors from 'constants/Colors';
@@ -24,14 +24,9 @@ const ShopList = ({ navigation, props }) => {
         { id: 3, title: 'SITARAM BHATOORE WALA.', time: '05 march 2021' },
     ]
 
-    const categoryPopulorDataList = [
-        { id: 1, title: 'LALAJI KI SHOP', img: Images.shopGroceries },
-        { id: 2, title: 'CHAMAN KI SHOP', img: Images.shopGroceries },
-        { id: 3, title: 'SITARAM BHATOORE WALA.', img: Images.shopGroceries },
-    ]
+    const categoryPopulorDataList = useSelector(state => state.Inventory.shopListMap)
 
-    useEffect(() => {
-    }, [])
+    useEffect(() => {    }, [])
     //================================ Start common Function ===========================================
     //================================ Start common componenet =========================================== 
     //header
@@ -79,7 +74,7 @@ const ShopList = ({ navigation, props }) => {
                 // nestedScrollEnabled
                 style={{ marginBottom: 20 }}
                 // bounces={false}
-                data={categoryPopulorDataList}
+                data={Object.values(categoryPopulorDataList)}
                 renderItem={({ item, index }) => _renderItemShopList({ item, index })}
                 keyExtractor={item => item.id.toString()}
             />
