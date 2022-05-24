@@ -30,7 +30,7 @@ const CheckOut = ({ navigation, props }) => {
     const [check, setCheck] = useState(false);
 
     const cartList = useSelector(state => state.cart)
-    console.log(cartList, ' ++++++++')
+    // console.log(cartList, ' ++++++++')
     useEffect(() => {
     }, [])
     //================================ Start common Function ===========================================

@@ -10,6 +10,7 @@ import dashboardStyle from 'theme/component/DashboardStyle';
 import textStyle from 'theme/component/TextStyle';
 import GeneralStatusBarColor from 'statusbarstyle/GeneralStatusBarColor';
 import { cartActions } from '../../Redux/Reducers/Cart'
+import { inventoryActions } from "../../Redux/Reducers/Inventory";
 import {
     RLHeader,
     RLText,
@@ -21,17 +22,22 @@ import {
 
 const Dashboard = ({ navigation, props }) => {
     let fieldSearchRef = React.createRef();
+    const selectedShop = useSelector(state => state.Inventory.selectedShop)
+    const categoryDataList = useSelector(state => state.Inventory.shopCategoriesMap[selectedShop] || [])
+    const selectedCategory = useSelector(state => state.Inventory.selectedCategory)
+    const searchDataList = useSelector(state => state.Inventory.shopCategoryItemsMap[selectedCategory] || [])
+    console.log( selectedCategory, searchDataList, ' !!!!!!!')
 
-    const categoryDataList = [
-        { id: 1, title: 'Women Fashion', img: Images.women },
-        { id: 2, title: 'Men  Fashion', img: Images.men },
-        { id: 3, title: 'Child Fashion', img: Images.child },
-        { id: 4, title: 'Food  & Drink', img: Images.fooddrink },
-        { id: 5, title: 'Kitchen Tools', img: Images.kitchentools },
-        { id: 6, title: 'Furniture', img: Images.furniture },
-        { id: 7, title: 'Hobby', img: Images.hobby },
-        { id: 8, title: 'Electronic', img: Images.electrinoc },
-    ];
+    // const categoryDataList = [
+    //     { id: 1, title: 'Women Fashion', img: Images.women },
+    //     { id: 2, title: 'Men  Fashion', img: Images.men },
+    //     { id: 3, title: 'Child Fashion', img: Images.child },
+    //     { id: 4, title: 'Food  & Drink', img: Images.fooddrink },
+    //     { id: 5, title: 'Kitchen Tools', img: Images.kitchentools },
+    //     { id: 6, title: 'Furniture', img: Images.furniture },
+    //     { id: 7, title: 'Hobby', img: Images.hobby },
+    //     { id: 8, title: 'Electronic', img: Images.electrinoc },
+    // ];
     const saleDiscountDataList = [
         { id: 1, title: 'Camelia Heels', img: Images.sdheels },
         { id: 2, title: 'Converse Shoes', img: Images.sdShoes },
@@ -44,40 +50,42 @@ const Dashboard = ({ navigation, props }) => {
         { id: 2, title: 'Kimono Clogs', img: Images.pophanky },
     ]
 
-    const SearchDataList = [
-        { id: 1, categoryId: 0, title: 'Vionata', img: Images.ptVio, },
-        { id: 2, categoryId: 0, title: 'Opuntia', img: Images.ptopu, },
-        { id: 3, categoryId: 0, title: 'Annalis', img: Images.ptann, },
-        { id: 4, categoryId: 0, title: 'Columnar', img: Images.ptcol, },
-        { id: 5, categoryId: 0, title: 'Milaria', img: Images.ptmil, },
-        { id: 6, categoryId: 0, title: 'Inca', img: Images.ptinc, },
-        { id: 7, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-        { id: 8, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-        { id: 9, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-        { id: 10, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-        { id: 11, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-        { id: 12, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-    ]
+    // const SearchDataList = [
+    //     { id: 1, categoryId: 0, title: 'Vionata', img: Images.ptVio, },
+    //     { id: 2, categoryId: 0, title: 'Opuntia', img: Images.ptopu, },
+    //     { id: 3, categoryId: 0, title: 'Annalis', img: Images.ptann, },
+    //     { id: 4, categoryId: 0, title: 'Columnar', img: Images.ptcol, },
+    //     { id: 5, categoryId: 0, title: 'Milaria', img: Images.ptmil, },
+    //     { id: 6, categoryId: 0, title: 'Inca', img: Images.ptinc, },
+    //     { id: 7, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+    //     { id: 8, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+    //     { id: 9, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+    //     { id: 10, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+    //     { id: 11, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
+    //     { id: 12, categoryId: 1, title: 'Emerald', img: Images.furniture, },
+    // ]
     const ArrayList1 = [] //Array1
     const ArrayList2 = [] //Array2
     const [data1, setData1] = useState([]);//Array1
     const [data2, setData2] = useState([]);//Array2
-    const [selectedCategory, setSelectedCategory] = useState(0);
-    const [toolTipVisible, setToolTipVisible] = useState(false); //show toolTip
+    // const [toolTipVisible, setToolTipVisible] = useState(false); //show toolTip
     const item = useSelector((state) => state)
     const dispatch = useDispatch()
-    console.log(item, ' -------')
+    // console.log(item, ' -------')
     useEffect(() => {
-        SearchDataList.map((item, index) => {
-            if (index % 2 == 0) {
-                ArrayList1.push(item)
-                setData1(ArrayList1)
-            }
-            else {
-                ArrayList2.push(item)
-                setData2(ArrayList2)
-            }
-        })  //Slice Array
+        if(searchDataList) {
+            console.log( searchDataList, ' ********')
+            searchDataList.map((item, index) => {
+                if (index % 2 == 0) {
+                    ArrayList1.push(item)
+                    setData1(ArrayList1)
+                }
+                else {
+                    ArrayList2.push(item)
+                    setData2(ArrayList2)
+                }
+            })  //Slice Array
+        }
     }, [])
 
     //================================ Start common Function ===========================================
@@ -93,15 +101,8 @@ const Dashboard = ({ navigation, props }) => {
 
     //on Click ListItem
     const _onClickItem = (params) => {
-        // switch (params) {
-        //     case 1:
-        //         break;
-        //     case 2:
-        //         break;
-        //     default:
-        //         break;
-        // }
-        setSelectedCategory(params)
+
+        dispatch(inventoryActions.setSelectedCategory(params))
     }
     //================================ Start common componenet =========================================== 
     //header
@@ -262,7 +263,7 @@ const Dashboard = ({ navigation, props }) => {
                 categoryImg={item.img}  
                 catname={item.title}
                 marginLeft={index == 0 ? BaseStyle.DEVICE_WIDTH / 100 * 7.5 : 0}
-                onPress={() => _onClickItem(index%2)} />
+                onPress={() => _onClickItem(item.id)} />
         )
     }
 
@@ -339,6 +340,7 @@ const Dashboard = ({ navigation, props }) => {
 
         //Search Product
         const _renderSearchProduct = () => {
+            console.log(data1, data2, ' ^^^^^')
             return (
                 <View style={[viewStyle.rowdirections, viewStyle.centerViewStyle, { marginBottom: 30 }]}>
                     <FlatList
@@ -376,10 +378,6 @@ const Dashboard = ({ navigation, props }) => {
     
         //Flatlist SearchList2 Item
         const _renderItemSearchList2 = ({ item, index }) => {
-            if(item.categoryId !== selectedCategory) {
-                return;
-            }
-    
             return (
                 <RLSearchProductList
                     imgBackgroundHeight={169}

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { View, Image, FlatList } from "react-native";
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import BaseText from "constants/BaseText";
 import BaseStyle from 'constants/BaseStyle';
 import Colors from 'constants/Colors';
@@ -16,6 +16,7 @@ import {
 } from 'basecomponent';
 import { SafeAreaView } from "react-native-safe-area-context";
 import RLShopkeeperList from "../../common/RLShopkeeperList";
+import { inventoryActions } from "../../Redux/Reducers/Inventory";
 
 const ShopList = ({ navigation, props }) => {
     const ShopCandidatesList = [
@@ -27,6 +28,12 @@ const ShopList = ({ navigation, props }) => {
     const categoryPopulorDataList = useSelector(state => state.Inventory.shopListMap)
 
     useEffect(() => {    }, [])
+    const dispatch = useDispatch()
+
+    const handleOnShopSelect = () => {
+        dispatch(inventoryActions.setSelectedShop(1))
+        navigation.navigate('Dashboard')
+    }
     //================================ Start common Function ===========================================
     //================================ Start common componenet =========================================== 
     //header
@@ -90,7 +97,7 @@ const ShopList = ({ navigation, props }) => {
                 rateValue={'4.5'}
                 ratestarValue={4.5}
                 shopkeeperImg={item.img}
-                onPress={() => navigation.navigate('Dashboard')}
+                onPress={handleOnShopSelect}
             />
         )
     }

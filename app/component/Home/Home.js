@@ -18,7 +18,7 @@ const Home = ({ navigation, props }) => {
     //================================ Start common componenet =========================================== 
     //Screen Title
     const _renderTitle = () => {
-        console.log('+++++++++++++++++++')
+        // console.log('+++++++++++++++++++')
         return (
             <View>
                 <RLText
