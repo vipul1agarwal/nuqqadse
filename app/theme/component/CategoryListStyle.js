@@ -18,8 +18,8 @@ const categoryListStyle = StyleSheet.create({
     },
     imgStyle: {
         resizeMode: 'contain',
-        width: 36,
-        height: 29
+        width: 100,
+        height: 100,
     },
     txtStyle: {
         textAlign: 'center',

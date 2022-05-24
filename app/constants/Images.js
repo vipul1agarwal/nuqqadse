@@ -127,5 +127,12 @@ const Images = {
     shop5: require('assets/ShopIcon/shop_pic_5.png'),
     shop6: require('assets/ShopIcon/shop_pic_6.png'),
 
+
+    cat1: require('assets/categoryIcon/cat_1.png'),
+    cat2: require('assets/categoryIcon/cat_2.png'),
+    cat3: require('assets/categoryIcon/cat_3.png'),
+    cat4: require('assets/categoryIcon/cat_4.png'),
+
+
 }
 export default Images;
