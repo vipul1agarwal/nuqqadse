@@ -28,20 +28,21 @@ const checkOutListStyle = StyleSheet.create({
     },
     imgeStyle: {
         backgroundColor: Colors.white,
-        height: 114,
-        width: 114,
+        height: 100,
+        width: 100,
         borderRadius: 10,
-        marginVertical: 15,
-        marginHorizontal: 12
+        marginVertical: 5,
+        marginHorizontal: 10
     },
     detailmainViewStyle: {
         paddingLeft: 10,
         width: BaseStyle.DEVICE_WIDTH / 100 * 45,
-        marginVertical: 15,
-        justifyContent: 'space-between'
+        marginVertical: 5,
+        justifyContent: 'center'
     },
     proNameViewStyle: {
-        justifyContent: 'space-between'
+        justifyContent: 'space-around',
+        fontSize: 24
     },
     proNametxtStyle: {
         color: Colors.darkGray,
@@ -49,8 +50,8 @@ const checkOutListStyle = StyleSheet.create({
         fontFamily: ENV.zfontFamilyMedium
     },
     deletegImgStyle: {
-        width: 12,
-        height: 15,
+        width: 27,
+        height: 30,
     },
     resizeImg: {
         resizeMode: 'contain'
@@ -66,13 +67,14 @@ const checkOutListStyle = StyleSheet.create({
         fontFamily: ENV.nfontFamilyRegular
     },
     addCartViewStyle: {
-        width: 105, height: 25,
+        width: 120, height: 35,
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: Colors.gray
+        borderColor: Colors.gray,
+        marginTop: 20,
     },
     subBtnStyle: {
-        width: 25,
+        width: 33,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -101,6 +103,7 @@ const checkOutListStyle = StyleSheet.create({
     },
     qtybtnStyle: {
         width: 55,
+        fontSize: 18,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: Colors.gray,

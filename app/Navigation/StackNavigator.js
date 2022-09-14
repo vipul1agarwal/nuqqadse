@@ -22,6 +22,7 @@ import AddCart from "component/SearchProduct/AddCart";
 import Category from "component/Category/Category";
 import SubCategory from "component/Category/SubCategory";
 import PaymentType from "component/Payment/PaymentType";
+import ChatBox from "../component/Chat/ChatBox";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ const StackNavigator = () => {
             <Stack.Screen name="Category" component={Category} />
             <Stack.Screen name="SubCategory" component={SubCategory} />
             <Stack.Screen name="PaymentType" component={PaymentType} />
+            <Stack.Screen name="ChatBox" component={ChatBox} />
         </Stack.Navigator>
     );
 }

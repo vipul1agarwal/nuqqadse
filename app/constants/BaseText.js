@@ -116,8 +116,7 @@ const BaseText = {
     Notification: 'Notification',
     EmptyNotificationTitle: 'No message notification found! We will let you know if there is any notification for you.',
     ReturnHome: 'RETURN TO HOME',
-    HappyDay: 'Happy Day.'
-
-
+    HappyDay: 'Happy Day.',
+    SendOrder: 'Send Order'
 }
 export default BaseText;

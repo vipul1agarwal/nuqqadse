@@ -7,19 +7,31 @@ import Images from "constants/Images";
 import checkOutListStyle from 'theme/component/CheckOutListStyle';
 import viewStyle from 'theme/component/ViewStyle';
 import RLText from './RLText'
+import { useDispatch } from "react-redux";
+import { cartActions } from "../Redux/Reducers/Cart";
 
 const RLCheckOutList = (props) => {
 
     const {
-        prodName,
-        prodColor,
-        pordSize,
-        prodPrice,
-        prodQty,
+        title: prodName,
+        id: prodId,
+        subTotal: prodPrice,
+        quantity: prodQty,
         showCheckImge,
         onPressCheck,
-        prodImg
-    } = props;
+        img: prodImg
+    } = props.prodItem;
+
+    console.log(props.prodItem, ' ********')
+    const dispatch = useDispatch()
+
+    const handleSubtractQuantity = () => {
+        dispatch(cartActions.removeFromCart(prodId))
+    }
+
+    const handleAddQuantity = () => {
+        dispatch(cartActions.addToCart([props.prodItem]))
+    }
 
     return (
         <View style={[viewStyle.selfCenter, checkOutListStyle.mainViewStyle]}>
@@ -52,7 +64,7 @@ const RLCheckOutList = (props) => {
                                 style={[checkOutListStyle.deletegImgStyle, checkOutListStyle.resizeImg]} />
                         </View>
 
-                        <RLText
+                        {/* <RLText
                             RlnumberOfLines={1}
                             text={`${BaseText.Color}${prodColor}`}
                             style={[checkOutListStyle.coloTxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 35 }]}
@@ -61,16 +73,12 @@ const RLCheckOutList = (props) => {
                             RlnumberOfLines={1}
                             text={`${BaseText.Size}${pordSize}`}
                             style={[checkOutListStyle.coloTxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 35 }]}
-                        />
-                        <RLText
-                            RlnumberOfLines={1}
-                            text={prodPrice}
-                            style={[checkOutListStyle.pritxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 35 }]}
-                        />
+                        /> */}
+
 
                         <View style={[viewStyle.rowdirections, checkOutListStyle.addCartViewStyle]}>
-                            <TouchableOpacity style={[checkOutListStyle.subBtnStyle
-                            ]}>
+                            <TouchableOpacity style={[checkOutListStyle.subBtnStyle]}
+                                onPress={handleSubtractQuantity}>
                                 <Image
                                     source={Images.subscrtion}
                                     style={[checkOutListStyle.resizeImg, checkOutListStyle.addImgStyle]} />
@@ -84,16 +92,23 @@ const RLCheckOutList = (props) => {
                                 />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={[checkOutListStyle.subBtnStyle, { borderBottomRightRadius: 5, borderTopRightRadius: 5 }]}>
+                            <TouchableOpacity style={[checkOutListStyle.subBtnStyle, { borderBottomRightRadius: 5, borderTopRightRadius: 5 }]}
+                                onPress={handleAddQuantity}>
                                 <Image
                                     source={Images.addition}
                                     style={[checkOutListStyle.resizeImg, checkOutListStyle.addImgStyle]} />
                             </TouchableOpacity>
+
+                            <RLText
+                                RlnumberOfLines={1}
+                                text={`${prodPrice}` + ' \u20B9'}
+                                style={[checkOutListStyle.pritxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 35, marginLeft: 30 }]}
+                            />
                         </View>
                     </View>
                 </View>
 
-                <View style={[viewStyle.rowdirections, checkOutListStyle.subTotalViewStyle]}>
+                {/* <View style={[viewStyle.rowdirections, checkOutListStyle.subTotalViewStyle]}>
                     <RLText
                         RlnumberOfLines={1}
                         text={BaseText.SubTotal}
@@ -104,7 +119,7 @@ const RLCheckOutList = (props) => {
                         text={'$152'}
                         style={[checkOutListStyle.totaltxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 25, color: Colors.pink }]}
                     />
-                </View>
+                </View> */}
             </View>
         </View>
     );

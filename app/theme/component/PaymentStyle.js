@@ -61,7 +61,7 @@ const paymentStyle = StyleSheet.create({
     prodpricetxtStyle: {
         fontSize: 14,
         color: Colors.activebtn,
-        width: BaseStyle.DEVICE_WIDTH / 100 * 55,
+        // width: BaseStyle.DEVICE_WIDTH / 100 * 55,
         fontFamily: ENV.nfontFamilyRegular
     },
     paymentImgStyle: {
