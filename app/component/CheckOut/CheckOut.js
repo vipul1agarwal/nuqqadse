@@ -19,18 +19,10 @@ import {
 } from 'basecomponent';
 
 const CheckOut = ({ navigation, props }) => {
-    const SearchDataList = [
-        { id: 1, title: 'Levi’s Jeans', color: 'Dark Gray', size: 'L', price: '$76', qty: 5, img: Images.chekLeviJens },
-        { id: 2, title: 'Milano Parada', color: 'Dark Gray', size: 'L', price: '$76', qty: 5, img: Images.checkMilano },
-        // { id: 3, title: 'Levi’s Jeans', color: 'Dark Gray', size: 'L', price: '$76', qty: 5 },
-        // { id: 4, title: 'Levi’s Jeans', color: 'Dark Gray', size: 'L', price: '$76', qty: 5 },
-        // { id: 5, title: 'Levi’s Jeans', color: 'Dark Gray', size: 'L', price: '$76', qty: 5 },
-        // { id: 6, title: 'Levi’s Jeans', color: 'Dark Gray', size: 'L', price: '$76', qty: 5 },
-    ]
     const [check, setCheck] = useState(false);
 
-    const cartList = useSelector(state => state.cart)
-    // console.log(cartList, ' ++++++++')
+    const cartList = useSelector(state => state.Cart.cartItems)
+    const cartTotal = useSelector(state => state.Cart.cartTotal)
     useEffect(() => {
     }, [])
     //================================ Start common Function ===========================================
@@ -65,12 +57,7 @@ const CheckOut = ({ navigation, props }) => {
     //Flatlist CheckOut Item
     const renderItem = data => (
         <RLCheckOutList
-            prodName={data.item.title}
-            prodColor={data.item.color}
-            pordSize={data.item.size}
-            prodPrice={data.item.price}
-            prodQty={data.item.qty}
-            prodImg={data.item.img}
+            prodItem={data.item}
             showCheckImge={check ? true : false}
             onPressCheck={() => _onClickCheckItem()} />
     );
@@ -101,7 +88,7 @@ const CheckOut = ({ navigation, props }) => {
                     />
                     <RLText
                         RlnumberOfLines={1}
-                        text={'$152'}
+                        text={`${cartTotal}` + ' \u20B9'}
                         style={[checkOutStyle.priceTxtStyle]}
                     />
                 </View>

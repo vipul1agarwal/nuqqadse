@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState, } from "react";
-import { Keyboard, View, ImageBackground, Image, Switch, Modal } from "react-native";
-import { connect } from 'react-redux';
+import React, { Fragment, useEffect, useState } from "react";
+import { Keyboard, View, ImageBackground, Image, Switch, Modal, FlatList } from "react-native";
+import { connect, useSelector } from 'react-redux';
 import ENV from 'env/index';
 import BaseText from "constants/BaseText";
 import BaseStyle from 'constants/BaseStyle';
@@ -31,6 +31,13 @@ const Payment = ({ navigation, props }) => {
     const [showPasswordModal, setShowPasswordModal] = useState(false);//Show Password Modal
     const [showSucessModal, setShowSucessModal] = useState(false);//show Sucess Modal
     const [showButton, setshowButton] = useState(true);
+    // const navigation1 = useNavigation();
+
+
+    const cartList = useSelector(state => state.Cart.cartItems)
+    const cartTotal = useSelector(state => state.Cart.cartTotal)
+
+    console.log(cartList, ' -----!!!!!!');
 
     useEffect(() => {
         Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
@@ -84,6 +91,7 @@ const Payment = ({ navigation, props }) => {
                 title={BaseText.Payment}
                 showTitle={true}
                 onPressleftSimple={() => navigation.goBack()}
+                // onPressLeftSimple={()=>navigation.navigate('ChatBox')}
             />
         )
     }
@@ -127,42 +135,56 @@ const Payment = ({ navigation, props }) => {
         )
     }
 
-    //Product Info
-    const _renderProductInfo = () => {
+    const _renderProducts = () => {
         return (
             <View style={[paymentStyle.cartmainViewStyle]}>
-                <View style={[viewStyle.rowdirections, viewStyle.centerViewWidth, paymentStyle.containSpac, { paddingVertical: 10 }]}>
-                    <View style={{ width: BaseStyle.DEVICE_WIDTH / 100 * 20, }}>
-                        <ImageBackground
-                            style={paymentStyle.prodImgStyle}
-                            imageStyle={{}}
-                            source={Images.chekLeviJens}>
-                        </ImageBackground>
-                    </View>
+                <FlatList
+                    // nestedScrollEnabled
+                    style={{ marginBottom: 20 }}
+                    // bounces={false}
+                    data={cartList}
+                    renderItem={({ item }) => _renderProductInfo(item)}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </View>
 
-                    <View style={[paymentStyle.prodMainViewStyle]} >
+        )
+    }
+
+    //Product Info
+    const _renderProductInfo = (item) => {
+        return (
+            <View style={[viewStyle.rowdirections, viewStyle.centerViewWidth, paymentStyle.containSpac, { paddingVertical: 10 }]}>
+                <View style={{ width: BaseStyle.DEVICE_WIDTH / 100 * 20, }}>
+                    <ImageBackground
+                        style={paymentStyle.prodImgStyle}
+                        imageStyle={{}}
+                        source={item.img}>
+                    </ImageBackground>
+                </View>
+
+                <View style={[paymentStyle.prodMainViewStyle]} >
+                    <RLText
+                        RlnumberOfLines={1}
+                        text={item.title}
+                        style={paymentStyle.prodnametxtStyle}
+                    />
+                    <RLText
+                        RlnumberOfLines={1}
+                        text={`${item.price}` + ' \u20B9'}
+                        style={[paymentStyle.colortxtStyle]}
+                    />
+                    <View style={[viewStyle.rowdirections, paymentStyle.containSpac,]}>
                         <RLText
                             RlnumberOfLines={1}
-                            text={'Levi’s Jeans'}
-                            style={paymentStyle.prodnametxtStyle}
+                            text={`x${item.quantity}`}
+                            style={[paymentStyle.shipaddtxtStyle, { color: Colors.darkGray }]}
                         />
                         <RLText
                             RlnumberOfLines={1}
-                            text={`${BaseText.Color}${' dark gray'}${' | '}${BaseText.Size}${'L'}`}
-                            style={[paymentStyle.colortxtStyle]}
+                            text={`${item.price* item.quantity}` + ' \u20B9'}
+                            style={paymentStyle.prodpricetxtStyle}
                         />
-                        <View style={[viewStyle.rowdirections, paymentStyle.containSpac,]}>
-                            <RLText
-                                RlnumberOfLines={1}
-                                text={'$76'}
-                                style={paymentStyle.prodpricetxtStyle}
-                            />
-                            <RLText
-                                RlnumberOfLines={1}
-                                text={'x2'}
-                                style={[paymentStyle.shipaddtxtStyle, { color: Colors.darkGray }]}
-                            />
-                        </View>
                     </View>
                 </View>
             </View>
@@ -176,12 +198,12 @@ const Payment = ({ navigation, props }) => {
                 <View style={[viewStyle.rowdirections, viewStyle.centerViewWidth, paymentStyle.shipaddmainViewStyle]}>
                     <RLText
                         RlnumberOfLines={1}
-                        text={BaseText.DeliveryService}
+                        text={BaseText.Total}
                         style={[paymentStyle.shipaddtxtStyle]}
                     />
                     <RLText
                         RlnumberOfLines={1}
-                        text={BaseText.Edit}
+                        text={`${cartTotal}` + ' \u20B9'}
                         style={[paymentStyle.shipaddtxtStyle]}
                     />
                 </View>
@@ -193,7 +215,7 @@ const Payment = ({ navigation, props }) => {
                     />
                     <RLText
                         RlnumberOfLines={1}
-                        text={'$2'}
+                        text={`${2}` + ' \u20B9'}
                         style={[paymentStyle.shipaddtxtStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 50, textAlign: 'right', fontFamily: ENV.nfontFamilyBold }]}
                     />
                 </View>
@@ -351,7 +373,7 @@ const Payment = ({ navigation, props }) => {
     //Buy NowButton
     const _renderBuyNowButton = () => {
         return (
-            <View style={[checkOutStyle.checkOutMainViewStyle,]}>
+            <View style={checkOutStyle.checkOutMainViewStyle}>
                 <View style={[viewStyle.centerViewStyle, viewStyle.rowdirections, checkOutStyle.totalTextViewStyle]}>
                     <RLText
                         text={BaseText.Total}
@@ -359,14 +381,14 @@ const Payment = ({ navigation, props }) => {
                     />
                     <RLText
                         RlnumberOfLines={1}
-                        text={'$152'}
+                        text={`${cartTotal + 2}` + ' \u20B9'}
                         style={checkOutStyle.priceTxtStyle}
                     />
                 </View>
                 <RLButton
                     SimpleButton={true}
-                    onpress={() => setShowPasswordModal(true)}
-                    simplebuttontext={BaseText.BuyNow}
+                    onpress={() => navigation.navigate('ChatBox')}
+                    simplebuttontext={BaseText.SendOrder}
                     simplebuttontextStyle={buttonStyle.buttonTextStyle}
                     simplebuttonStyle={[buttonStyle.commonbuttonStyle, { width: BaseStyle.DEVICE_WIDTH / 100 * 85, backgroundColor: Colors.activebtn }]}
                 />
@@ -380,7 +402,7 @@ const Payment = ({ navigation, props }) => {
                 <GeneralStatusBarColor backgroundColor={Colors.white}
                     barStyle={"dark-content"} />
                 {_header()}
-                {_rendeShowModal()}
+                {/* {_rendeShowModal()} */}
 
                 <KeyboardAwareScrollView
                     bounces={false}
@@ -389,12 +411,12 @@ const Payment = ({ navigation, props }) => {
                     keyboardShouldPersistTaps={'always'}
                     nestedScrollEnabled={false}>
                     <View style={[viewStyle.flex]}>
-                        {_renderShippingAdd()}
-                        {_renderProductInfo()}
+                        {/* {_renderShippingAdd()} */}
+                        {_renderProducts()  }
                         {_renderExpressDelivery()}
                         {_renderAddDescription()}
-                        {_renderPaymentMethod()}
-                        {_renderSwitch()}
+                        {/* {_renderPaymentMethod()} */}
+                        {/* {_renderSwitch()} */}
                     </View>
                 </KeyboardAwareScrollView>
 

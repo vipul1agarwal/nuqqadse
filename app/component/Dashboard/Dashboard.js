@@ -26,7 +26,6 @@ const Dashboard = ({ navigation, props }) => {
     const categoryDataList = useSelector(state => state.Inventory.shopCategoriesMap[selectedShop] || [])
     const selectedCategory = useSelector(state => state.Inventory.selectedCategory)
     const searchDataList = useSelector(state => state.Inventory.shopCategoryItemsMap[selectedCategory] || [])
-    console.log( selectedCategory, searchDataList, ' !!!!!!!')
 
     // const categoryDataList = [
     //     { id: 1, title: 'Women Fashion', img: Images.women },
@@ -50,20 +49,6 @@ const Dashboard = ({ navigation, props }) => {
         { id: 2, title: 'Kimono Clogs', img: Images.pophanky },
     ]
 
-    // const SearchDataList = [
-    //     { id: 1, categoryId: 0, title: 'Vionata', img: Images.ptVio, },
-    //     { id: 2, categoryId: 0, title: 'Opuntia', img: Images.ptopu, },
-    //     { id: 3, categoryId: 0, title: 'Annalis', img: Images.ptann, },
-    //     { id: 4, categoryId: 0, title: 'Columnar', img: Images.ptcol, },
-    //     { id: 5, categoryId: 0, title: 'Milaria', img: Images.ptmil, },
-    //     { id: 6, categoryId: 0, title: 'Inca', img: Images.ptinc, },
-    //     { id: 7, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-    //     { id: 8, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-    //     { id: 9, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-    //     { id: 10, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-    //     { id: 11, categoryId: 1, title: 'Floral', img: Images.kitchentools, },
-    //     { id: 12, categoryId: 1, title: 'Emerald', img: Images.furniture, },
-    // ]
     const ArrayList1 = [] //Array1
     const ArrayList2 = [] //Array2
     const [data1, setData1] = useState([]);//Array1
@@ -71,11 +56,10 @@ const Dashboard = ({ navigation, props }) => {
     // const [toolTipVisible, setToolTipVisible] = useState(false); //show toolTip
     const item = useSelector((state) => state)
     const dispatch = useDispatch()
-    // console.log(item, ' -------')
     useEffect(() => {
         if(searchDataList) {
-            console.log( searchDataList, ' ********')
             searchDataList.map((item, index) => {
+                // item.quantity = 1
                 if (index % 2 == 0) {
                     ArrayList1.push(item)
                     setData1(ArrayList1)
@@ -86,7 +70,7 @@ const Dashboard = ({ navigation, props }) => {
                 }
             })  //Slice Array
         }
-    }, [])
+    }, [searchDataList])
 
     //================================ Start common Function ===========================================
     //OnChange TextInput
@@ -340,7 +324,7 @@ const Dashboard = ({ navigation, props }) => {
 
         //Search Product
         const _renderSearchProduct = () => {
-            console.log(data1, data2, ' ^^^^^')
+            // console.log(data1, data2, ' ^^^^^')
             return (
                 <View style={[viewStyle.rowdirections, viewStyle.centerViewStyle, { marginBottom: 30 }]}>
                     <FlatList
@@ -365,16 +349,16 @@ const Dashboard = ({ navigation, props }) => {
         }
     
         //Flatlist SearchList1 Item
-        const _renderItemSearchList1 = ({ item, index }) => {
-            return (
-                <RLSearchProductList
-                    imgBackgroundHeight={index % 2 == 0 ? 262 : 169}
-                    productName={item.title}
-                    productImg={item.img}
-                onPress={() => dispatch(cartActions.addToCart)}
-                />
-            )
-        }
+        // const _renderItemSearchList1 = ({ item, index }) => {
+        //     return (
+        //         <RLSearchProductList
+        //             imgBackgroundHeight={index % 2 == 0 ? 262 : 169}
+        //             productName={item.title}
+        //             productImg={item.img}
+        //         onPress={() => dispatch(cartActions.addToCart)}
+        //         />
+        //     )
+        // }
     
         //Flatlist SearchList2 Item
         const _renderItemSearchList2 = ({ item, index }) => {
